@@ -5,19 +5,23 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <img alt="Vue logo" class="logo" src="@/assets/LogoLaKobra.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="Bienvenidos a LaKobra" />
+      <div class="bg-kobra-dark p-6 rounded-xl border border-kobra-green shadow-[0_0_15px_rgba(173,255,47,0.3)]">
+        <HelloWorld msg="Bienvenidos a LaKobra" class="text-kobra-green font-black" />
+      </div>
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+      <nav class="mt-4 flex gap-4">
+        <RouterLink to="/" class="hover:text-kobra-green transition-colors">Home</RouterLink>
+        <RouterLink to="/about" class="hover:text-kobra-green transition-colors">About</RouterLink>
       </nav>
     </div>
   </header>
 
-  <RouterView />
+  <main class="p-8">
+    <RouterView />
+  </main>
 </template>
 
 <style scoped>
