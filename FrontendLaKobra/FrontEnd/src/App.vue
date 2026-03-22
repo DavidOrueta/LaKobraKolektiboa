@@ -2,24 +2,25 @@
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 </script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/LogoLaKobra.svg" width="125" height="125" />
+  <header class="flex flex-col items-center py-10">
+    <img alt="Logo LaKobra" class="logo mb-6" src="@/assets/LogoLaKobra.svg" width="125" height="125" />
 
-    <div class="wrapper">
+    <div class="wrapper flex flex-col items-center">
       <div class="bg-kobra-dark p-6 rounded-xl border border-kobra-green shadow-[0_0_15px_rgba(173,255,47,0.3)]">
-        <HelloWorld msg="Bienvenidos a LaKobra" class="text-kobra-green font-black" />
+        <h1 class="text-kobra-green font-black text-2xl uppercase tracking-tighter">Bienvenidos a LaKobra</h1>
       </div>
 
-      <nav class="mt-4 flex gap-4">
-        <RouterLink to="/" class="hover:text-kobra-green transition-colors">Home</RouterLink>
-        <RouterLink to="/about" class="hover:text-kobra-green transition-colors">About</RouterLink>
+      <nav class="mt-6 flex gap-6 text-sm uppercase tracking-widest font-bold">
+        <RouterLink to="/" class="hover:text-kobra-green transition-all">Home</RouterLink>
+        <RouterLink to="/about" class="hover:text-kobra-green transition-all">About</RouterLink>
+        
+        <RouterLink to="/contacto" class="text-kobra-green hover:text-white transition-all underline decoration-2 underline-offset-4">Contacto</RouterLink>
       </nav>
     </div>
   </header>
 
-  <main class="p-8">
+  <main class="p-8 max-w-7xl mx-auto">
     <RouterView />
   </main>
 </template>
