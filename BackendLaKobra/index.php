@@ -27,7 +27,7 @@ $token = $res['qr_token'];
         <p>Rol: <strong><?php echo $_SESSION['rol']; ?></strong></p>
 
         <div style="background: white; padding: 10px; display: inline-block; margin: 10px 0;">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=<?php echo $token; ?>" alt="QR Socio">
+            <!-- <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=<?php echo $token; ?>" alt="QR Socio"> -->
         </div>
 
         <?php if ($_SESSION['rol'] === 'admin'): ?>
