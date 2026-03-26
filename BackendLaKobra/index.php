@@ -7,7 +7,6 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-// Obtener el token del usuario actual para el QR [cite: 68]
 $stmt = $conn->prepare("SELECT qr_token FROM usuarios WHERE id = ?");
 $stmt->bind_param("i", $_SESSION['user_id']);
 $stmt->execute();

@@ -1,7 +1,7 @@
 <?php
 $host = 'localhost';
 $user = 'root';
-$pass = ''; // Vacío en XAMPP por defecto
+$pass = ''; 
 $db   = 'lakobra';
 
 $conn = new mysqli($host, $user, $pass, $db);

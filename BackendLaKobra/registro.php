@@ -3,11 +3,10 @@ require_once 'config/db.php';
 $mensaje = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Generación obligatoria Sprint 1
+    
     $qr_token = bin2hex(random_bytes(16)); 
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-    // Consulta adaptada a tu tabla 'usuarios'
     $sql = "INSERT INTO usuarios (nombre, dni, email, password, qr_token, direccion) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ssssss", $_POST['nombre'], $_POST['dni'], $_POST['email'], $password, $qr_token, $_POST['direccion']);

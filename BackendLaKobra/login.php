@@ -4,7 +4,7 @@ require_once 'config/db.php';
 $error = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Consulta adaptada a tu tabla 'usuarios' [cite: 64]
+    
     $stmt = $conn->prepare("SELECT id, password, rol, nombre FROM usuarios WHERE email = ?");
     $stmt->bind_param("s", $_POST['email']);
     $stmt->execute();
