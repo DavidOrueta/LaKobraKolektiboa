@@ -1,27 +1,51 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { ref } from 'vue'
+
+const active = ref(0) // valor inicial 0
 </script>
 <template>
-  <header class="flex flex-col items-center py-10">
-    <img alt="Logo LaKobra" class="logo mb-6" src="@/assets/LogoLaKobra.svg" width="125" height="125" />
+<div class="fixed left-6 top-2 z-[9999] inline-flex bg-white backdrop-blur-md rounded-xl">
+  <img src="@/assets/LogoLaKobra.svg" class="h-24 w-auto" />
+</div>
 
-    <div class="wrapper flex flex-col items-center">
-      <div class="bg-kobra-dark p-6 rounded-xl border border-kobra-green shadow-[0_0_15px_rgba(173,255,47,0.3)]">
-        <h1 class="text-kobra-green font-black text-2xl uppercase tracking-tighter">Bienvenidos a LaKobra</h1>
-      </div>
+  <header class="h-30 bg-black flex items-center px-6 relative z-10">
 
-      <nav class="mt-6 flex gap-6 text-sm uppercase tracking-widest font-bold">
-        <RouterLink to="/" class="hover:text-kobra-green transition-all">Home</RouterLink>
-        <RouterLink to="/about" class="hover:text-kobra-green transition-all">About</RouterLink>
-        
-        <RouterLink to="/contacto" class="text-kobra-green hover:text-white transition-all underline decoration-2 underline-offset-4">Contacto</RouterLink>
-      </nav>
+    <!-- NAV -->
+    <nav class="flex-1 flex justify-center gap-6 text-sm uppercase tracking-widest font-bold text-white">
+      <RouterLink to="/" class="hover:text-kobra-green transition-all">Home</RouterLink>
+      <RouterLink to="/about" class="hover:text-kobra-green transition-all">About</RouterLink>
+      <RouterLink to="/contacto" class="text-kobra-green hover:text-white transition-all underline decoration-2 underline-offset-4">
+        Contacto
+      </RouterLink>
+    </nav>
+
+    <!-- BOTONES -->
+    <div class="flex items-center space-x-2">
+      <button
+        :class="active === 0 ? 'bg-green-500 text-white' : 'bg-gray-200 text-black'"
+        @click="active = 0"
+        class="px-4 py-2 rounded font-bold transition-all hover:bg-green-600"
+      >
+        Iniciar Sesión
+      </button>
+
+      <button
+        :class="active === 1 ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'"
+        @click="active = 1"
+        class="px-4 py-2 rounded font-bold transition-all hover:bg-blue-600"
+      >
+        Registrarse
+      </button>
     </div>
+
   </header>
 
+
+
+
   <main class="p-8 max-w-7xl mx-auto">
-    <RouterView />
+    <router-view></router-view>
   </main>
 </template>
 
