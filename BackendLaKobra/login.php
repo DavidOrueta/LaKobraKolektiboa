@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
-    <title>LAKOBRA - LOGIN</title>
+    <title>LaKobra Login</title>
 </head>
 <body>
     <div class="container">
@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form method="POST">
             <input type="email" name="email" placeholder="EMAIL" required>
             <input type="password" name="password" placeholder="PASSWORD" required>
-            <button type="submit">ENTRAR</button>
+            <button type="submit">Entrar</button>
         </form>
     </div>
 </body>

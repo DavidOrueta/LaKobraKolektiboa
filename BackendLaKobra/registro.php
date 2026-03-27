@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="email" name="email" placeholder="EMAIL" required>
             <input type="password" name="password" placeholder="PASSWORD" required>
             <input type="text" name="direccion" placeholder="DIRECCIÓN">
-            <button type="submit">DARSE DE ALTA</button>
+            <button type="submit">Darse de Alta</button>
         </form>
     </div>
 </body>
