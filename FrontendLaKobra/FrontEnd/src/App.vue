@@ -11,7 +11,7 @@ const active = ref(0) // valor inicial 0
 
   <header class="h-30 bg-black flex items-center px-6 relative z-10">
 
-    <!-- NAV -->
+    
     <nav class="flex-1 flex justify-center gap-6 text-sm uppercase tracking-widest font-bold text-white">
       <RouterLink to="/" class="hover:text-kobra-green transition-all">Home</RouterLink>
       <RouterLink to="/about" class="hover:text-kobra-green transition-all">About</RouterLink>
@@ -20,7 +20,7 @@ const active = ref(0) // valor inicial 0
       </RouterLink>
     </nav>
 
-    <!-- BOTONES -->
+    
     <div class="flex items-center space-x-2">
       <button
         :class="active === 0 ? 'bg-green-500 text-white' : 'bg-gray-200 text-black'"
