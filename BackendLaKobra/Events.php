@@ -1,7 +1,7 @@
 <?php
 require_once "<config>db.php";
 
-/* 🔹 Obtener todos los eventos */
+
 function getEventos() {
     $conexion = conectarDB();
     $sql = "SELECT * FROM eventos";
