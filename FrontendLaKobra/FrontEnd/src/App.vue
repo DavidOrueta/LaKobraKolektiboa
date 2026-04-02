@@ -18,6 +18,7 @@ const active = ref(0) // valor inicial 0
       <RouterLink to="/contacto" class="text-kobra-green hover:text-white transition-all underline decoration-2 underline-offset-4">
         Contacto
       </RouterLink>
+      <router-link to="/Eventos" class="text-kobra-green hover:text-white transition-all underline decoration-2 underline-offset-4">Eventos</router-link>
     </nav>
 
     

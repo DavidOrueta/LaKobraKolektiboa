@@ -1,12 +1,16 @@
 <?php
-$host = 'localhost';
-$user = 'root';
-$pass = ''; 
-$db   = 'lakobra';
+function conectarDB() {
+    $host = "localhost";
+    $db = "tu_base_de_datos";
+    $user = "root";
+    $pass = "";
 
-$conn = new mysqli($host, $user, $pass, $db);
-
-if ($conn->connect_error) {
-    die("Error de conexión: " . $conn->connect_error);
+    try {
+        $conexion = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $pass);
+        $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return $conexion;
+    } catch (PDOException $e) {
+        die("Error de conexión: " . $e->getMessage());
+    }
 }
 ?>
