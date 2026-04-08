@@ -1,31 +1,45 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import { ref } from 'vue'
+import LoginModal from '@/components/IniciarSesion.vue'
 
+const showLogin = ref(false)
 const active = ref(0) // valor inicial 0
+
+
+const openLogin = () => {
+  active.value = 0
+  showLogin.value = true
+}
 </script>
 <template>
-<div class="fixed left-6 top-2 z-[9999] inline-flex bg-white backdrop-blur-md rounded-xl">
-  <img src="@/assets/LogoLaKobra.svg" class="h-24 w-auto" />
-</div>
+  <div class="fixed left-6 top-2 z-[9999] inline-flex bg-white backdrop-blur-md rounded-xl">
+    <img src="@/assets/LogoLaKobra.svg" class="h-24 w-auto" />
+  </div>
 
   <header class="h-30 bg-black flex items-center px-6 relative z-10">
-
-    
-    <nav class="flex-1 flex justify-center gap-6 text-sm uppercase tracking-widest font-bold text-white">
+    <nav
+      class="flex-1 flex justify-center gap-6 text-sm uppercase tracking-widest font-bold text-white"
+    >
       <RouterLink to="/" class="hover:text-kobra-green transition-all">Home</RouterLink>
       <RouterLink to="/about" class="hover:text-kobra-green transition-all">About</RouterLink>
-      <RouterLink to="/contacto" class="text-kobra-green hover:text-white transition-all underline decoration-2 underline-offset-4">
+      <RouterLink
+        to="/contacto"
+        class="text-kobra-green hover:text-white transition-all underline decoration-2 underline-offset-4"
+      >
         Contacto
       </RouterLink>
-      <router-link to="/Eventos" class="text-kobra-green hover:text-white transition-all underline decoration-2 underline-offset-4">Eventos</router-link>
+      <router-link
+        to="/Events"
+        class="text-kobra-green hover:text-white transition-all underline decoration-2 underline-offset-4"
+        >Events</router-link
+      >
     </nav>
 
-    
     <div class="flex items-center space-x-2">
       <button
         :class="active === 0 ? 'bg-green-500 text-white' : 'bg-gray-200 text-black'"
-        @click="active = 0"
+        @click="openLogin"
         class="px-4 py-2 rounded font-bold transition-all hover:bg-green-600"
       >
         Iniciar Sesión
@@ -39,15 +53,18 @@ const active = ref(0) // valor inicial 0
         Registrarse
       </button>
     </div>
-
   </header>
-
-
-
+    <LoginModal
+  :visible="showLogin"
+  @close="showLogin = false"
+/>
 
   <main class="p-8 max-w-7xl mx-auto">
     <router-view></router-view>
   </main>
+
+
+
 </template>
 
 <style scoped>
