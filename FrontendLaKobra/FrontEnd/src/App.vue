@@ -30,9 +30,9 @@ const openLogin = () => {
         Contacto
       </RouterLink>
       <router-link
-        to="/Events"
+        to="/Eventos"
         class="text-kobra-green hover:text-white transition-all underline decoration-2 underline-offset-4"
-        >Events</router-link
+        >Eventos</router-link
       >
     </nav>
 
