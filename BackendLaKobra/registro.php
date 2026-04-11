@@ -1,49 +1,62 @@
 <?php
 require_once 'config/db.php';
-$mensaje = "";
+
+/* =========================
+   CORS FIX
+========================= */
+header("Access-Control-Allow-Origin: http://localhost:5173");
+header("Access-Control-Allow-Methods: POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
+header("Content-Type: application/json");
+
+/* Preflight OPTIONS */
+if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
+    http_response_code(200);
+    exit();
+}
+
+/* =========================
+   RESPONSE
+========================= */
+$response = ["success" => false, "message" => ""];
+
+/* =========================
+   INPUT JSON (IMPORTANTE)
+========================= */
+$data = json_decode(file_get_contents("php://input"), true);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
-    $qr_token = bin2hex(random_bytes(16)); 
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-    $sql = "INSERT INTO usuarios (nombre, dni, email, password, qr_token, direccion) VALUES (?, ?, ?, ?, ?, ?)";
+    $qr_token = bin2hex(random_bytes(16));
+    $password = password_hash($data['password'], PASSWORD_DEFAULT);
+
+    $sql = "INSERT INTO usuarios (nombre, dni, email, password, qr_token, direccion)
+            VALUES (?, ?, ?, ?, ?, ?)";
+
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssss", $_POST['nombre'], $_POST['dni'], $_POST['email'], $password, $qr_token, $_POST['direccion']);
+
+    $stmt->bind_param(
+        "ssssss",
+        $data['nombre'],
+        $data['dni'],
+        $data['email'],
+        $password,
+        $qr_token,
+        $data['direccion']
+    );
 
     try {
         if ($stmt->execute()) {
-            $mensaje = "<div class='mensaje' style='color:#39ff14'>REGISTRO OK. <a href='login.php' style='color:#fff'>LOGUEATE</a></div>";
+            $response["success"] = true;
+            $response["message"] = "Registro OK";
         }
     } catch (mysqli_sql_exception $e) {
         if ($e->getCode() == 1062) {
-            $mensaje = "<div class='mensaje' style='color:#ff00ff'>EL DNI O EMAIL YA EXISTE</div>";
+            $response["message"] = "DNI o email ya existe";
         } else {
-            $mensaje = "<div class='mensaje' style='color:#ff00ff'>ERROR: " . $e->getMessage() . "</div>";
+            $response["message"] = "Error: " . $e->getMessage();
         }
     }
 }
-?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
-    <title>LaKobra Registrarse</title>
-</head>
-<body>
-    <div class="container">
-        <h2>Nuevo Socio</h2>
-        <?php echo $mensaje; ?>
-        <form method="POST">
-            <input type="text" name="nombre" placeholder="NOMBRE COMPLETO" required>
-            <input type="text" name="dni" placeholder="DNI" required>
-            <input type="email" name="email" placeholder="EMAIL" required>
-            <input type="password" name="password" placeholder="PASSWORD" required>
-            <input type="text" name="direccion" placeholder="DIRECCIÓN">
-            <button type="submit">Darse de Alta</button>
-        </form>
-    </div>
-</body>
-</html>
+echo json_encode($response);
