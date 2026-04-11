@@ -26,9 +26,17 @@ const openLogin = () => {
       <RouterLink to="/contacto" class="text-kobra-green hover:text-white transition-all underline decoration-2 underline-offset-4">
         Contacto
       </RouterLink>
+<<<<<<< HEAD
       <RouterLink to="/Events" class="text-kobra-green hover:text-white transition-all underline decoration-2 underline-offset-4">
         Events
       </RouterLink>
+=======
+      <router-link
+        to="/Events"
+        class="text-kobra-green hover:text-white transition-all underline decoration-2 underline-offset-4"
+        >Eventos</router-link
+      >
+>>>>>>> cc83cd28068e998a3e3a5b91115461f8e66cb4a5
     </nav>
 
     <div class="flex items-center space-x-2">

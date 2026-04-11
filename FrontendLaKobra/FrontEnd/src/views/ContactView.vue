@@ -17,7 +17,7 @@ const enviarFormulario = () => {
 <template>
   <div class="max-w-2xl mx-auto py-12 px-6 bg-black/40 border border-kobra-green/20 rounded-2xl shadow-2xl">
     <h2 class="text-3xl font-black text-kobra-green uppercase italic mb-2 tracking-tighter">
-      Únete al Grito
+      Resuelve tus dudas
     </h2>
     <p class="text-gray-400 mb-8 text-sm uppercase tracking-widest">Contacto / Booking / Quejas al infierno</p>
 
