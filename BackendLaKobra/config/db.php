@@ -1,16 +1,20 @@
 <?php
+$host = "localhost";
+$db   = "lakobra";
+$user = "root";
+$pass = "";
+ 
+try {
+    $conn = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $pass);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Error de conexión: " . $e->getMessage());
+}
+ 
+// Función también disponible por si otros archivos la usan
 function conectarDB() {
-    $host = "localhost";
-    $db = "tu_base_de_datos";
-    $user = "root";
-    $pass = "";
-
-    try {
-        $conexion = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $pass);
-        $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        return $conexion;
-    } catch (PDOException $e) {
-        die("Error de conexión: " . $e->getMessage());
-    }
+    global $conn;
+    return $conn;
 }
 ?>
+ 

@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-
+ 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -12,7 +12,6 @@ const router = createRouter({
     {
       path: '/about',
       name: 'about',
-      // Esto carga la página solo cuando la visitas (mejor rendimiento)
       component: () => import('../views/AboutView.vue'),
     },
     {
@@ -21,12 +20,17 @@ const router = createRouter({
       component: () => import('../views/ContactView.vue'),
     },
     {
-      path:'/Events',
+      path: '/Events',
       name: 'Events',
-      component: () => import('../views/Events.vue')
-
-    }
+      component: () => import('../views/Events.vue'),
+    },
+    {
+      path: '/registro',
+      name: 'registro',
+      component: () => import('../components/RegistroKobra.vue'),
+    },
   ],
 })
-
+ 
 export default router
+ 
