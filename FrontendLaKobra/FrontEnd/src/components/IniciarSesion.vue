@@ -17,10 +17,36 @@
   </div>
 </template>
 
+<<<<<<< HEAD
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
+=======
+<script>
+export default {
+  props: ["visible"],
+  data() {
+    return {
+      email: "",
+      password: "",
+      error: ""
+    };
+  },
+  methods: {
+    async login() {
+      try {
+        const res = await fetch("http://localhost/Pruebas/LAKOBRAKOLEKTIBOA/BackendLaKobra/login.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            email: this.email,
+            password: this.password
+          })
+        });
+>>>>>>> 8fce333ebbb3df65a2a618a6740f3c0b19d0cdd2
 
 defineProps({ visible: Boolean })
 defineEmits(['close'])

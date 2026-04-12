@@ -59,13 +59,16 @@
           <button class="btn-save"   @click="guardarEvento" :disabled="guardando">
             {{ guardando ? 'Guardando...' : 'Guardar' }}
           </button>
+          <pre>{{ eventos }}</pre>
         </div>
       </div>
     </div>
 
   </div>
+  
 </template>
 
+<<<<<<< HEAD
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useAuthStore } from '@/stores/auth'
@@ -185,3 +188,39 @@ h1 { font-size: 2rem; text-transform: uppercase; letter-spacing: 4px; }
 .modal-actions { display: flex; gap: 10px; margin-top: 20px; justify-content: flex-end; }
 .error { color: #ff00ff; margin-bottom: 10px; }
 </style>
+=======
+<script>
+export default {
+  data() {
+    return {
+      eventos: []
+    }
+  },
+mounted() {
+  fetch('http://localhost/Practicas/LAKOBRAKOLEKTIBOA/BackendLaKobra/Events.php')
+    .then(res => {
+      console.log("STATUS:", res.status)
+      return res.text()
+    })
+    .then(text => {
+      console.log("RAW RESPONSE:", text)
+
+      try {
+        this.eventos = JSON.parse(text)
+      } catch (e) {
+        console.error("JSON ERROR:", e)
+      }
+    })
+    .catch(err => console.error("FETCH ERROR:", err))
+},
+  methods: {
+    estadoClase(estado) {
+      if (estado === 'confirmado') return 'bg-green-100 text-green-800'
+      if (estado === 'pendiente') return 'bg-yellow-100 text-yellow-800'
+      if (estado === 'cancelado') return 'bg-red-100 text-red-800'
+      return 'bg-gray-100 text-gray-800'
+    }
+  }
+}
+</script>
+>>>>>>> 8fce333ebbb3df65a2a618a6740f3c0b19d0cdd2
