@@ -1,18 +1,34 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import LoginModal from '@/components/IniciarSesion.vue'
 import RegisterModal from '@/components/RegistroPanel.vue'
 
 const showLogin = ref(false)
-const active = ref(0) // valor inicial 0
+const showRegister = ref(false)
+const active = ref(0)
 
+// 🔐 rol reactivo
+const rol = ref(localStorage.getItem("rol"))
 
+// ✅ mejor con computed (reactivo real)
+const esAdmin = computed(() => rol.value === 'admin')
+
+// 👇 login modal control
 const openLogin = () => {
-  active.value = 0
   showLogin.value = true
+  showRegister.value = false
+  active.value = 0
+}
+
+// 👇 register modal control
+const openRegister = () => {
+  showRegister.value = true
+  showLogin.value = false
+  active.value = 1
 }
 </script>
+
 <template>
   <div class="fixed left-6 top-2 z-[9999] inline-flex bg-white backdrop-blur-md rounded-xl">
     <img src="@/assets/LogoLaKobra.svg" class="h-24 w-auto" />
@@ -21,24 +37,27 @@ const openLogin = () => {
   <header class="h-30 bg-black flex items-center px-6 relative z-10">
 
     <nav class="flex-1 flex justify-center gap-6 text-sm uppercase tracking-widest font-bold text-white">
-      <RouterLink to="/" class="hover:text-kobra-green transition-all">Home</RouterLink>
-      <RouterLink to="/about" class="hover:text-kobra-green transition-all">About</RouterLink>
-      <RouterLink to="/contacto" class="text-kobra-green hover:text-white transition-all underline decoration-2 underline-offset-4">
-        Contacto
-      </RouterLink>
-      <router-link
-        to="/events"
-        class="text-kobra-green hover:text-white transition-all underline decoration-2 underline-offset-4"
-        >Eventos</router-link
-      >
+      <RouterLink to="/">Home</RouterLink>
+      <RouterLink to="/about">About</RouterLink>
+      <RouterLink to="/contacto">Contacto</RouterLink>
+      <RouterLink to="/events">Eventos</RouterLink>
     </nav>
 
     <div class="flex items-center space-x-2">
 
+      <!-- 🔥 BOTÓN SOLO ADMIN -->
+      <button
+        v-if="esAdmin"
+        @click="$router.push('/crear-evento')"
+        class="px-4 py-2 rounded font-bold bg-red-500 text-white hover:bg-red-600 transition-all"
+      >
+        Crear evento
+      </button>
+
       <!-- LOGIN -->
       <button
         :class="active === 0 ? 'bg-green-500 text-white' : 'bg-gray-200 text-black'"
-        @click="showLogin = true; showRegister = false; active = 0"
+        @click="openLogin"
         class="px-4 py-2 rounded font-bold transition-all hover:bg-green-600"
       >
         Iniciar Sesión
@@ -47,26 +66,18 @@ const openLogin = () => {
       <!-- REGISTER -->
       <button
         :class="active === 1 ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'"
-        @click="showRegister = true; showLogin = false; active = 1"
+        @click="openRegister"
         class="px-4 py-2 rounded font-bold transition-all hover:bg-blue-600"
       >
         Registrarse
       </button>
 
     </div>
-
   </header>
 
-  <!-- MODALES (FUERA DEL HEADER) -->
-  <LoginModal
-    :visible="showLogin"
-    @close="showLogin = false"
-  />
-
-  <RegisterModal
-    :visible="showRegister"
-    @close="showRegister = false"
-  />
+  <!-- MODALES -->
+  <LoginModal :visible="showLogin" @close="showLogin = false" />
+  <RegisterModal :visible="showRegister" @close="showRegister = false" />
 
   <main class="p-8 max-w-7xl mx-auto">
     <router-view />

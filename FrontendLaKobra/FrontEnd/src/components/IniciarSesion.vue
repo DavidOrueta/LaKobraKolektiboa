@@ -67,12 +67,15 @@ console.log("RESPUESTA PHP:", text);
 
 const data = JSON.parse(text);
 
-        if (data.success) {
-          this.$emit("success", data.user);
-          this.$emit("close");
-        } else {
-          this.error = data.message;
-        }
+if (data.success) {
+  localStorage.setItem("rol", data.user.rol)
+  localStorage.setItem("user", JSON.stringify(data.user))
+
+  this.$emit("success", data.user)
+  this.$emit("close")
+
+  window.location.reload() // 🔥 importante para actualizar navbar
+}
 
       } catch (err) {
   console.log("ERROR COMPLETO:", err);

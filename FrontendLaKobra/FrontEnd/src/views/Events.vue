@@ -2,7 +2,7 @@
   <div class="p-6">
     <h1 class="text-2xl font-bold mb-6">Eventos</h1>
 
-    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-1">
       <div 
         v-for="evento in eventos" 
         :key="evento.id"
@@ -37,7 +37,7 @@
           >
             Ver detalles
           </button>
-          <pre>{{ eventos }}</pre>
+          
         </div>
       </div>
     </div>
