@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <!-- MODAL CREAR / EDITAR -->
+
     <div v-if="mostrarModal" class="overlay" @click.self="cerrarModal">
       <div class="modal">
         <h2>{{ form.id ? 'Editar Evento' : 'Nuevo Evento' }}</h2>

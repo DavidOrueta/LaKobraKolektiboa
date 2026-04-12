@@ -11,7 +11,7 @@ try {
     die("Error de conexión: " . $e->getMessage());
 }
  
-// Función también disponible por si otros archivos la usan
+
 function conectarDB() {
     global $conn;
     return $conn;

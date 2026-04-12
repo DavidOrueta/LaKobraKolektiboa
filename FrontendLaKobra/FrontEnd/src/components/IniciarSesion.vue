@@ -19,11 +19,13 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 
 defineProps({ visible: Boolean })
 defineEmits(['close'])
 
+const router   = useRouter()
 const auth     = useAuthStore()
 const email    = ref('')
 const password = ref('')
@@ -35,7 +37,10 @@ async function handleLogin() {
   cargando.value = true
   try {
     await auth.login(email.value, password.value)
+    console.log('login ok, user:', auth.user, 'isAdmin:', auth.isAdmin)
+    router.push('/Events')
   } catch (e) {
+    console.log('error:', e.message)
     error.value = e.message
   } finally {
     cargando.value = false
