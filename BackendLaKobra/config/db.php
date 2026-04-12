@@ -1,7 +1,7 @@
 <?php
 function conectarDB() {
     $host = "localhost";
-    $db = "tu_base_de_datos";
+    $db = "lakobra";
     $user = "root";
     $pass = "";
 
