@@ -19,15 +19,15 @@
     </p>
   </div>
 </template>
-
+ 
 <script setup>
 import { ref, reactive } from 'vue'
-
+ 
 const error    = ref('')
 const exito    = ref(false)
 const cargando = ref(false)
 const form     = reactive({ nombre: '', dni: '', email: '', password: '', direccion: '' })
-
+ 
 async function handleRegistro() {
   error.value    = ''
   cargando.value = true
@@ -51,7 +51,7 @@ async function handleRegistro() {
   }
 }
 </script>
-
+ 
 <style scoped>
 .container { max-width: 350px; margin: 60px auto; border: 3px solid #fff; padding: 30px; background: #000; color: #fff; }
 h2 { text-align: center; margin-bottom: 16px; }

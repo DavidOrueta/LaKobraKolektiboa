@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
-    user: null
+    user: JSON.parse(sessionStorage.getItem('kobra_user') || 'null')
   }),
 
   getters: {
@@ -21,8 +21,8 @@ export const useAuthStore = defineStore('auth', {
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error || 'Error al iniciar sesión')
-      this.user = data  // { nombre, rol }
-      // sin redirección — el componente decide a dónde ir
+      this.user = data
+      sessionStorage.setItem('kobra_user', JSON.stringify(data))
     },
 
     async logout() {
@@ -31,6 +31,7 @@ export const useAuthStore = defineStore('auth', {
         credentials: 'include'
       })
       this.user = null
+      sessionStorage.removeItem('kobra_user')
     },
 
     async fetchMe() {
@@ -38,9 +39,16 @@ export const useAuthStore = defineStore('auth', {
         const res = await fetch('http://localhost/LaKobraKolektiboa/BackendLaKobra/me.php', {
           credentials: 'include'
         })
-        if (res.ok) this.user = await res.json()
+        if (res.ok) {
+          const data = await res.json()
+          this.user = data
+          sessionStorage.setItem('kobra_user', JSON.stringify(data))
+        } else {
+          this.user = null
+          sessionStorage.removeItem('kobra_user')
+        }
       } catch {
-        this.user = null
+       
       }
     }
   }

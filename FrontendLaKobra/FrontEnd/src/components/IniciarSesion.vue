@@ -16,22 +16,22 @@
     </div>
   </div>
 </template>
-
+ 
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
-
+ 
 defineProps({ visible: Boolean })
 defineEmits(['close'])
-
+ 
 const router   = useRouter()
 const auth     = useAuthStore()
 const email    = ref('')
 const password = ref('')
 const error    = ref('')
 const cargando = ref(false)
-
+ 
 async function handleLogin() {
   error.value    = ''
   cargando.value = true
@@ -45,7 +45,7 @@ async function handleLogin() {
   }
 }
 </script>
-
+ 
 <style scoped>
 .overlay {
   position: fixed;
@@ -65,3 +65,4 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 .link  { text-align: center; margin-top: 12px; }
 a { color: #39ff14; }
 </style>
+ 

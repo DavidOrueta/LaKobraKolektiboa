@@ -25,9 +25,9 @@ const router = createRouter({
       component: () => import('../views/Events.vue'),
     },
     {
-    path: '/registro',
-  name: 'registro',
-  component: () => import('../views/RegistroKobra.vue'),
+      path: '/registro',
+      name: 'registro',
+      component: () => import('../components/RegistroKobra.vue'),
     },
   ],
 })

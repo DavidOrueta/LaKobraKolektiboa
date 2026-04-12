@@ -15,28 +15,36 @@ require_once '../config/db.php';
  
 $data = json_decode(file_get_contents('php://input'), true);
  
-if (!isset($data['email'], $data['password'])) {
+if (!isset($data['nombre'], $data['dni'], $data['email'], $data['password'])) {
     http_response_code(400);
-    echo json_encode(['error' => 'Faltan campos']);
+    echo json_encode(['error' => 'Faltan campos obligatorios']);
     exit;
 }
  
-$stmt = $conn->prepare("SELECT id, nombre, password, rol FROM usuarios WHERE email = :email");
-$stmt->execute([':email' => $data['email']]);
-$user = $stmt->fetch(PDO::FETCH_ASSOC);
+$qr_token = bin2hex(random_bytes(16));
+$password = password_hash($data['password'], PASSWORD_DEFAULT);
  
-if (!$user || !password_verify($data['password'], $user['password'])) {
-    http_response_code(401);
-    echo json_encode(['error' => 'Email o contraseña incorrectos']);
-    exit;
+$sql = "INSERT INTO usuarios (nombre, dni, email, password, qr_token, direccion)
+        VALUES (:nombre, :dni, :email, :password, :qr_token, :direccion)";
+ 
+try {
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([
+        ':nombre'    => $data['nombre'],
+        ':dni'       => $data['dni'],
+        ':email'     => $data['email'],
+        ':password'  => $password,
+        ':qr_token'  => $qr_token,
+        ':direccion' => $data['direccion'] ?? ''
+    ]);
+    echo json_encode(['success' => true]);
+} catch (PDOException $e) {
+    if ($e->getCode() == 23000) {
+        http_response_code(409);
+        echo json_encode(['error' => 'El DNI o email ya existe']);
+    } else {
+        http_response_code(500);
+        echo json_encode(['error' => 'Error interno: ' . $e->getMessage()]);
+    }
 }
- 
-$_SESSION['user_id'] = $user['id'];
-$_SESSION['nombre']  = $user['nombre'];
-$_SESSION['rol']     = $user['rol'];
- 
-echo json_encode([
-    'nombre' => $user['nombre'],
-    'rol'    => $user['rol']
-]);
  
