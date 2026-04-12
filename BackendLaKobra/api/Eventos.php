@@ -1,29 +1,17 @@
 <?php
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: http://localhost:5173');
-header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type');
-header('Access-Control-Allow-Credentials: true');
- 
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    http_response_code(204);
-    exit;
-}
- 
+
 session_start();
 require_once '../config/db.php';
- 
+
 $method = $_SERVER['REQUEST_METHOD'];
- 
-// Solo admin puede crear, editar y borrar
+
 function esAdmin() {
     return isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin';
 }
- 
+
 switch ($method) {
- 
-    // GET /eventos.php          → todos los eventos públicos
-    // GET /eventos.php?todos=1  → todos (solo admin)
+
     case 'GET':
         if (isset($_GET['todos']) && esAdmin()) {
             $stmt = $conn->query("SELECT * FROM eventos ORDER BY fecha_evento DESC");
@@ -32,8 +20,7 @@ switch ($method) {
         }
         echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
         break;
- 
-    // POST /eventos.php → crear evento (admin)
+
     case 'POST':
         if (!esAdmin()) { http_response_code(403); echo json_encode(['error' => 'Sin permisos']); exit; }
         $data = json_decode(file_get_contents('php://input'), true);
@@ -52,7 +39,7 @@ switch ($method) {
         ]);
         echo json_encode(['success' => true, 'id' => $conn->lastInsertId()]);
         break;
- 
+
     case 'PUT':
         if (!esAdmin()) { http_response_code(403); echo json_encode(['error' => 'Sin permisos']); exit; }
         $id   = (int)($_GET['id'] ?? 0);
@@ -77,7 +64,7 @@ switch ($method) {
         ]);
         echo json_encode(['success' => true]);
         break;
- 
+
     case 'DELETE':
         if (!esAdmin()) { http_response_code(403); echo json_encode(['error' => 'Sin permisos']); exit; }
         $id = (int)($_GET['id'] ?? 0);
@@ -85,9 +72,8 @@ switch ($method) {
         $conn->prepare("DELETE FROM eventos WHERE id = :id")->execute([':id' => $id]);
         echo json_encode(['success' => true]);
         break;
- 
+
     default:
         http_response_code(405);
         echo json_encode(['error' => 'Método no permitido']);
 }
- 
