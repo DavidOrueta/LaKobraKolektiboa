@@ -1,17 +1,17 @@
 <?php
-function conectarDB() {
-    $host = "localhost";
-    $db = "lakobra";
-    $user = "root";
-    $pass = "";
+$host = "localhost";
+$db   = "lakobra";
+$user = "root";
+$pass = "";
 
-    try {
-        $conexion = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $pass);
-        $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        return $conexion;
-    } catch (PDOException $e) {
-        die("Error de conexión: " . $e->getMessage());
-    }
-
+try {
+    $conn = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $pass);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die(json_encode(['error' => 'Error de conexión: ' . $e->getMessage()]));
 }
- 
+
+function conectarDB() {
+    global $conn;
+    return $conn;
+}
