@@ -51,7 +51,7 @@ export default {
   methods: {
     async login() {
       try {
-        const res = await fetch("http://localhost/api/login.php", {
+        const res = await fetch("http://localhost/Pruebas/LAKOBRAKOLEKTIBOA/BackendLaKobra/login.php", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
