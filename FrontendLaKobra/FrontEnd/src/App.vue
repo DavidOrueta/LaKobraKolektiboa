@@ -1,29 +1,15 @@
 <script setup>
 import { RouterLink, RouterView, useRouter, useRoute } from 'vue-router'
-import { ref } from 'vue'
-import LoginModal from '@/components/IniciarSesion.vue'
- 
-const router    = useRouter()
-const route     = useRoute()
-const showLogin = ref(false)
-const active    = ref(0)
- 
-const openLogin = () => {
-  active.value    = 0
-  showLogin.value = true
-}
- 
-const openRegistro = () => {
-  active.value = 1
-  router.push('/registro')
-}
+
+const router = useRouter()
+const route  = useRoute()
 </script>
- 
+
 <template>
   <div class="fixed left-6 top-2 z-[9999] inline-flex bg-white backdrop-blur-md rounded-xl">
     <img src="@/assets/LogoLaKobra.svg" class="h-24 w-auto" />
   </div>
- 
+
   <header class="h-30 bg-black flex items-center px-6 relative z-10">
     <nav
       class="flex-1 flex justify-center gap-6 text-sm uppercase tracking-widest font-bold text-white"
@@ -43,82 +29,76 @@ const openRegistro = () => {
         Eventos
       </RouterLink>
     </nav>
- 
-    <div class="flex items-center space-x-2">
+
+    <div
+      v-if="route.path !== '/login' && route.path !== '/registro'"
+      class="flex items-center space-x-2"
+    >
       <button
-        v-if="route.path !== '/registro'"
-        :class="active === 0 ? 'bg-green-500 text-white' : 'bg-gray-200 text-black'"
-        @click="openLogin"
-        class="px-4 py-2 rounded font-bold transition-all hover:bg-green-600"
+        @click="router.push('/login')"
+        class="px-4 py-2 rounded font-bold transition-all bg-gray-200 text-black hover:bg-green-600 hover:text-white"
       >
         Iniciar Sesión
       </button>
- 
+
       <button
-        v-if="route.path !== '/registro'"
-        :class="active === 1 ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'"
-        @click="openRegistro"
-        class="px-4 py-2 rounded font-bold transition-all hover:bg-blue-600"
+        @click="router.push('/registro')"
+        class="px-4 py-2 rounded font-bold transition-all bg-gray-200 text-black hover:bg-blue-600 hover:text-white"
       >
         Registrarse
       </button>
     </div>
   </header>
- 
-  <LoginModal
-    :visible="showLogin && route.path !== '/registro'"
-    @close="showLogin = false"
-  />
- 
+
   <main class="p-8 max-w-7xl mx-auto">
     <router-view></router-view>
   </main>
 </template>
- 
+
 <style scoped>
 header {
   line-height: 1.5;
   max-height: 100vh;
 }
- 
+
 nav {
   width: 100%;
   font-size: 12px;
   text-align: center;
   margin-top: 2rem;
 }
- 
+
 nav a.router-link-exact-active {
   color: var(--color-text);
 }
- 
+
 nav a.router-link-exact-active:hover {
   background-color: transparent;
 }
- 
+
 nav a {
   display: inline-block;
   padding: 0 1rem;
   border-left: 1px solid var(--color-border);
 }
- 
+
 nav a:first-of-type {
   border: 0;
 }
- 
+
 @media (min-width: 1024px) {
   header {
     display: flex;
     place-items: center;
     padding-right: calc(var(--section-gap) / 2);
   }
- 
+
   header .wrapper {
     display: flex;
     place-items: flex-start;
     flex-wrap: wrap;
   }
- 
+
   nav {
     text-align: left;
     margin-left: -1rem;
