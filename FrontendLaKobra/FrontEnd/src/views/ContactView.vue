@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { ref } from 'vue'
 
 // Esto es para guardar lo que el usuario escribe
@@ -12,9 +12,9 @@ const enviarFormulario = () => {
   alert(`¡Aquelarre avisado! Gracias ${formulario.value.nombre}. (Aquí conectaremos con el PHP mañana)`)
 
 }
-</script>
+</script> -->
 
-<template>
+<!-- <template>
   <div class="max-w-2xl mx-auto py-12 px-6 bg-black/40 border border-kobra-green/20 rounded-2xl shadow-2xl">
     <h2 class="text-3xl font-black text-kobra-green uppercase italic mb-2 tracking-tighter">
       Resuelve tus dudas
@@ -42,4 +42,4 @@ const enviarFormulario = () => {
       </button>
     </form>
   </div>
-</template>
+</template> -->
