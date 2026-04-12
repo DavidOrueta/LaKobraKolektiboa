@@ -27,7 +27,7 @@ const router = createRouter({
     {
       path: '/registro',
       name: 'registro',
-      component: () => import('../components/RegistroKobra.vue'),
+      component: () => import('../views/RegistroKobra.vue'),
     },
   ],
 })
