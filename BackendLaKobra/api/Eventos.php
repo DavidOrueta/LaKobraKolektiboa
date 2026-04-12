@@ -53,7 +53,6 @@ switch ($method) {
         echo json_encode(['success' => true, 'id' => $conn->lastInsertId()]);
         break;
  
-    // PUT /eventos.php?id=X → editar evento (admin)
     case 'PUT':
         if (!esAdmin()) { http_response_code(403); echo json_encode(['error' => 'Sin permisos']); exit; }
         $id   = (int)($_GET['id'] ?? 0);
@@ -79,7 +78,6 @@ switch ($method) {
         echo json_encode(['success' => true]);
         break;
  
-    // DELETE /eventos.php?id=X → borrar evento (admin)
     case 'DELETE':
         if (!esAdmin()) { http_response_code(403); echo json_encode(['error' => 'Sin permisos']); exit; }
         $id = (int)($_GET['id'] ?? 0);

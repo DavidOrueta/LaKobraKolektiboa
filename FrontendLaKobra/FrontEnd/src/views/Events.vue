@@ -87,8 +87,7 @@ const formVacio = () => ({
 })
 const form = ref(formVacio())
  
-const BASE = 'http://localhost/LaKobraKolektiboa/BackendLaKobra/api/eventos.php'
- 
+const BASE = 'http://localhost/LaKobraKolektiboa/BackendLaKobra/api/Eventos.php' 
 async function cargarEventos() {
   cargando.value = true
   try {
