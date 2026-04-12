@@ -10,7 +10,7 @@ const formulario = ref({
 
 const enviarFormulario = () => {
   alert(`¡Aquelarre avisado! Gracias ${formulario.value.nombre}. (Aquí conectaremos con el PHP mañana)`)
-  // Aquí es donde mañana vuestro compañero de Backend meterá la magia
+
 }
 </script>
 

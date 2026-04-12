@@ -10,7 +10,7 @@ Copiar
       <button v-if="auth.isAdmin" class="btn-crear" @click="abrirFormulario()">+ Nuevo Evento</button>
     </div>
  
-    <!-- LISTA DE EVENTOS -->
+
     <div v-if="cargando" class="msg">Cargando eventos...</div>
     <div v-else-if="eventos.length === 0" class="msg">No hay eventos disponibles.</div>
     <div v-else class="grid">
