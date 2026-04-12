@@ -1,31 +1,57 @@
 <?php
-require_once 'config/db.php';
-
-/* =========================
-   CORS FIX
-========================= */
+header("Content-Type: application/json; charset=utf-8");
 header("Access-Control-Allow-Origin: http://localhost:5173");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
-header("Content-Type: application/json");
 
-/* Preflight OPTIONS */
+error_reporting(E_ALL);
+ini_set('display_errors', 0);
+
+require_once 'config/db.php';
+
+/* Preflight */
 if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
     http_response_code(200);
     exit();
 }
 
-/* =========================
-   RESPONSE
-========================= */
-$response = ["success" => false, "message" => ""];
+/* Solo POST */
+if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+    echo json_encode([
+        "success" => false,
+        "message" => "Método no permitido"
+    ]);
+    exit;
+}
 
-/* =========================
-   INPUT JSON (IMPORTANTE)
-========================= */
-$data = json_decode(file_get_contents("php://input"), true);
+/* INPUT JSON */
+$raw = file_get_contents("php://input");
+$data = json_decode($raw, true);
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if (!is_array($data)) {
+    echo json_encode([
+        "success" => false,
+        "message" => "JSON inválido o vacío"
+    ]);
+    exit;
+}
+
+/* VALIDACIÓN CAMPOS */
+$campos = ['nombre', 'dni', 'email', 'password', 'direccion'];
+
+foreach ($campos as $c) {
+    if (empty($data[$c])) {
+        echo json_encode([
+            "success" => false,
+            "message" => "Falta el campo: $c"
+        ]);
+        exit;
+    }
+}
+
+try {
+
+    $conn = conectarDB();
 
     $qr_token = bin2hex(random_bytes(16));
     $password = password_hash($data['password'], PASSWORD_DEFAULT);
@@ -35,28 +61,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $stmt = $conn->prepare($sql);
 
-    $stmt->bind_param(
-        "ssssss",
+    $stmt->execute([
         $data['nombre'],
         $data['dni'],
         $data['email'],
         $password,
         $qr_token,
         $data['direccion']
-    );
+    ]);
 
-    try {
-        if ($stmt->execute()) {
-            $response["success"] = true;
-            $response["message"] = "Registro OK";
-        }
-    } catch (mysqli_sql_exception $e) {
-        if ($e->getCode() == 1062) {
-            $response["message"] = "DNI o email ya existe";
-        } else {
-            $response["message"] = "Error: " . $e->getMessage();
-        }
-    }
+    echo json_encode([
+        "success" => true,
+        "message" => "Registro OK"
+    ]);
+
+} catch (Throwable $e) {
+    echo json_encode([
+        "success" => false,
+        "message" => "Error servidor",
+        "debug" => $e->getMessage()
+    ]);
 }
-
-echo json_encode($response);

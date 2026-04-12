@@ -51,7 +51,7 @@ export default {
   methods: {
     async login() {
       try {
-        const res = await fetch("http://localhost/api/login.php", {
+        const res = await fetch("http://localhost/Practicas/LAKOBRAKOLEKTIBOA/BackendLakobra/login.php", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -62,7 +62,10 @@ export default {
           })
         });
 
-        const data = await res.json();
+        const text = await res.text();
+console.log("RESPUESTA PHP:", text);
+
+const data = JSON.parse(text);
 
         if (data.success) {
           this.$emit("success", data.user);
@@ -72,8 +75,9 @@ export default {
         }
 
       } catch (err) {
-        this.error = "Error de conexión";
-      }
+  console.log("ERROR COMPLETO:", err);
+  this.error = err.message;
+}
     }
   }
 };
