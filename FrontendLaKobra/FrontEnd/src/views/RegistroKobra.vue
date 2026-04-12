@@ -53,13 +53,36 @@ async function handleRegistro() {
 </script>
  
 <style scoped>
-.container { max-width: 350px; margin: 60px auto; border: 3px solid #fff; padding: 30px; background: #000; color: #fff; }
-h2 { text-align: center; margin-bottom: 16px; }
-input { width: 100%; padding: 10px; margin: 8px 0; background: #111; color: #fff; border: 1px solid #444; box-sizing: border-box; }
-button { width: 100%; padding: 10px; background: #39ff14; color: #000; border: none; font-weight: bold; cursor: pointer; text-transform: uppercase; }
-button:disabled { opacity: 0.5; cursor: not-allowed; }
-.msg { text-align: center; margin-bottom: 10px; }
-.error { color: #ff00ff; }
-.exito { color: #39ff14; }
-a { color: #39ff14; cursor: pointer; }
+.container { 
+  max-width: 350px; 
+  margin: 60px auto; 
+  border: 3px solid #fff; 
+  padding: 30px; 
+  background: #000; 
+  color: #fff; }
+
+h2 { text-align: center; 
+  margin-bottom: 16px; 
+}
+input { width: 100%; 
+  padding: 10px;
+   margin: 8px 0; 
+   background: #111; 
+   color: #fff; 
+   border: 1px solid #444; 
+   box-sizing: border-box; 
+  }
+button { width: 100%; 
+  padding: 10px; 
+  background: #ffffff; 
+  color: #000; 
+  border: none; 
+  font-weight: bold; 
+  cursor: pointer; 
+} 
+.msg { text-align: center;  
+}
+.error { color: #ff0000; }
+.exito { color: #00a349; }
+a { color: #ffffff; cursor: pointer; }
 </style>

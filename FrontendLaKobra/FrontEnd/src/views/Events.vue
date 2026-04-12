@@ -151,38 +151,107 @@ onMounted(async () => {
 </script>
  
 <style scoped>
-.eventos-page { max-width: 900px; margin: 0 auto; color: #fff; }
-.eventos-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
-h1 { font-size: 2rem; text-transform: uppercase; letter-spacing: 4px; }
+.eventos-page { max-width: 900px;
+   margin: 0 auto; 
+   color: #fff; }
+.eventos-header { display: flex; 
+  justify-content: space-between;
+   align-items: center; 
+   margin-bottom: 24px; 
+  }
+h1 { 
+  font-size: 2rem; 
+  text-transform: uppercase; 
+  
+  letter-spacing: 4px; }
  
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+
 .card { background: #111; border: 1px solid #333; padding: 20px; position: relative; }
 .card h2 { font-size: 1.1rem; margin-bottom: 8px; }
 .card p  { font-size: 0.85rem; color: #aaa; margin: 4px 0; }
 .card-estado { font-size: 0.7rem; text-transform: uppercase; font-weight: bold; margin-bottom: 8px; }
-.card-estado.confirmado { color: #39ff14; }
-.card-estado.pendiente  { color: #ffcc00; }
-.card-estado.cancelado  { color: #ff00ff; }
-.card-actions { display: flex; gap: 8px; margin-top: 12px; }
- 
-.msg { text-align: center; color: #aaa; padding: 40px; }
+
+.msg { text-align: center; color: #ffffff; padding: 40px; }
  
 
-.btn-crear  { background: #39ff14; color: #000; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
-.btn-edit   { background: #444; color: #fff; border: none; padding: 6px 12px; cursor: pointer; font-size: 0.8rem; }
-.btn-del    { background: #ff00ff; color: #000; border: none; padding: 6px 12px; cursor: pointer; font-size: 0.8rem; font-weight: bold; }
-.btn-cancel { background: #333; color: #fff; border: none; padding: 10px 20px; cursor: pointer; }
-.btn-save   { background: #39ff14; color: #000; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; }
-.btn-save:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-crear  { background: #39ff14; 
+  color: #000; 
+  border: none; 
+  padding: 10px 20px; 
+  font-weight: bold; 
+  cursor: pointer;
+}
+
+.btn-edit   {
+   background: #444; color: #fff; 
+  padding: 6px 12px; 
+  cursor: pointer;
+   font-size: 0.8rem; }
+.btn-del    { 
+  background: #ff00ff; 
+  color: #000; 
+  padding: 6px 12px;
+   cursor: pointer; 
+   font-size: 0.8rem; 
+   font-weight: bold; 
+  }
+.btn-cancel { background: #333; 
+  color: #fff; 
+  padding: 10px 20px;
+   cursor: pointer;
+   }
+.btn-save   {
+  
+  background: #39ff14;
+   color: #000; 
+  padding: 10px 20px;
+   font-weight: bold; 
+   cursor: pointer; 
+  }
+
+.btn-save:disabled { opacity: 0.5; 
+  cursor: not-allowed; }
  
-/* Modal */
-.overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; z-index: 1000; }
-.modal { background: #000; border: 2px solid #fff; padding: 30px; width: 100%; max-width: 420px; }
-.modal h2 { margin-bottom: 16px; text-transform: uppercase; }
-.modal label { display: block; font-size: 0.8rem; color: #aaa; margin: 10px 0 4px; text-transform: uppercase; }
-.modal input, .modal select { width: 100%; padding: 8px; background: #111; color: #fff; border: 1px solid #444; box-sizing: border-box; }
-.check-label { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: #aaa; cursor: pointer; }
-.check-label input { width: auto; }
-.modal-actions { display: flex; gap: 10px; margin-top: 20px; justify-content: flex-end; }
-.error { color: #ff00ff; margin-bottom: 10px; }
+/* //ventana modakl */
+.overlay { position: fixed; 
+  inset: 0;
+   background: rgba(0,0,0,0.8); 
+   display: flex;
+    align-items: center; 
+    justify-content: center; 
+  
+  }
+.modal {
+   background: #000;
+  
+  border: 2px solid #fff; 
+  padding: 30px;
+   width: 100%; 
+  max-width: 420px; 
+}
+
+
+
+.modal h2 {
+   margin-bottom: 16px; 
+  
+  text-transform: uppercase; 
+}
+.modal label { display: block; 
+  font-size: 0.8rem; 
+  color: #aaa; margin: 10px 0 4px;
+   text-transform: uppercase;
+  }
+.modal input, .modal select { width: 100%;
+   padding: 8px; 
+   background: #111; 
+   color: #fff; 
+   
+   border: 1px solid #444; 
+   box-sizing: border-box;
+   }
+
+
+
+.error { color: #ffffff; margin-bottom: 10px; }
 </style>
