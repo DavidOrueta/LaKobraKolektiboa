@@ -145,7 +145,7 @@ async function borrarEvento(id) {
 }
  
 onMounted(async () => {
-  await auth.fetchMe()  // recupera sesión si ya estaba logueado
+  await auth.fetchMe() 
   await cargarEventos()
 })
 </script>
@@ -167,7 +167,7 @@ h1 { font-size: 2rem; text-transform: uppercase; letter-spacing: 4px; }
  
 .msg { text-align: center; color: #aaa; padding: 40px; }
  
-/* Botones */
+
 .btn-crear  { background: #39ff14; color: #000; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
 .btn-edit   { background: #444; color: #fff; border: none; padding: 6px 12px; cursor: pointer; font-size: 0.8rem; }
 .btn-del    { background: #ff00ff; color: #000; border: none; padding: 6px 12px; cursor: pointer; font-size: 0.8rem; font-weight: bold; }

@@ -45,9 +45,9 @@ async function handleLogin() {
 .container { max-width: 350px; margin: 80px auto; border: 3px solid #fff; padding: 30px; background: #000; color: #fff; }
 h2  { text-align: center; margin-bottom: 16px; }
 input { width: 100%; padding: 10px; margin: 8px 0; background: #111; color: #fff; border: 1px solid #444; box-sizing: border-box; }
-button { width: 100%; padding: 10px; background: #39ff14; color: #000; border: none; font-weight: bold; cursor: pointer; text-transform: uppercase; }
+button { width: 100%; padding: 10px; background: #ffffff; color: #000; border: none; font-weight: bold; cursor: pointer; text-transform: uppercase; }
 button:disabled { opacity: 0.5; cursor: not-allowed; }
-.error { color: #ff00ff; text-align: center; }
+.error { color: #ffffff; text-align: center; }
 .link  { text-align: center; margin-top: 12px; }
-a { color: #39ff14; }
-</style>
+a { color: #ffffff; }
+</style>s

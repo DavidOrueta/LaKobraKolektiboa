@@ -159,14 +159,14 @@ h1 { font-size: 2rem; text-transform: uppercase; letter-spacing: 4px; }
 .card h2 { font-size: 1.1rem; margin-bottom: 8px; }
 .card p  { font-size: 0.85rem; color: #aaa; margin: 4px 0; }
 .card-estado { font-size: 0.7rem; text-transform: uppercase; font-weight: bold; margin-bottom: 8px; }
-.card-estado.confirmado { color: #39ff14; }
+
 .card-estado.pendiente  { color: #ffcc00; }
 .card-estado.cancelado  { color: #ff00ff; }
 .card-actions { display: flex; gap: 8px; margin-top: 12px; }
 
 .msg { text-align: center; color: #aaa; padding: 40px; }
 
-/* Botones */
+
 .btn-crear  { background: #39ff14; color: #000; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
 .btn-edit   { background: #444; color: #fff; border: none; padding: 6px 12px; cursor: pointer; font-size: 0.8rem; }
 .btn-del    { background: #ff00ff; color: #000; border: none; padding: 6px 12px; cursor: pointer; font-size: 0.8rem; font-weight: bold; }
